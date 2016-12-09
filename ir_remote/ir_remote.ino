@@ -22,8 +22,10 @@ void setup()
   irDetect.enableIRIn(); // Start the Receiver
 }
 
-void loop() {
-  if (irDetect.decode(&irIn)) {
+void loop() 
+{
+  if (irDetect.decode(&irIn)) 
+  {
     decodeIR();
     irDetect.resume(); 
   }
