@@ -1,20 +1,22 @@
 /*
- * 
+ * Calibrate the alarm by blocking the sensor for the first 5 seconds
+ * Then the alarm will sound when the block is removed!
  * 
  * 
  */
 
-int RED_PIN = 4;
-int GREEN_PIN = 6;
-int BLUE_PIN = 9;
-int PIEZO_PIN = 11;
-int PHOTORESISTOR_PIN = 13;
+int PIEZO_PIN = 2;
+int RED_PIN = 3;
+int GREEN_PIN = 5;
+int BLUE_PIN = 6;
+int PHOTORESISTOR_PIN = 5;
 int max_photoresistor_read = 0;
 
 void setup() 
 {
   // everything here gets run once at the beginning
 
+  Serial.begin(9600);
   // set the red pin to output (not input)
   pinMode(RED_PIN,  OUTPUT);
   pinMode(GREEN_PIN,OUTPUT);
@@ -28,6 +30,7 @@ void setup()
   digitalWrite(BLUE_PIN,HIGH);
 
   // get the maximum value for the photoresistor
+  Serial.println("Calibrating...");
   unsigned long current_time = millis();
   unsigned long target_time = current_time + 5000;
   while(current_time < target_time)
@@ -44,6 +47,9 @@ void setup()
   {
     Serial.println("It's very bright in here!");
   }
+  Serial.print("Photoresistor threshold = ");
+  Serial.println(max_photoresistor_read);
+  
 }
 
 void loop() 
@@ -53,11 +59,12 @@ void loop()
   if(current_photoresistor_read > max_photoresistor_read)
   {
     //sound the alarm!
-    digitalWrite(PHOTORESISTOR_PIN,HIGH);
+    digitalWrite(PIEZO_PIN,HIGH);
     delay(1000);
-    digitalWrite(PHOTORESISTOR_PIN,LOW);
+    digitalWrite(PIEZO_PIN,LOW);
   }
-
+  Serial.print("current read = ");
+  Serial.println(current_photoresistor_read);
   //pause for a millisecond before looping
-  delay(1);
+  delay(50);
 }
