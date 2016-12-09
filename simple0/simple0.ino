@@ -1,7 +1,7 @@
-int RED_PIN = 4;
-int GREEN_PIN = 6;
-int BLUE_PIN = 9;
-int PIEZO_PIN = 11;
+int PIEZO_PIN = 2;
+int RED_PIN = 3;
+int GREEN_PIN = 5;
+int BLUE_PIN = 6;
 
 void setup() 
 {
