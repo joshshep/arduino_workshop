@@ -1,3 +1,9 @@
+/*
+ * 
+ * 
+ * 
+ */
+
 int RED_PIN = 4;
 int GREEN_PIN = 6;
 int BLUE_PIN = 9;
@@ -15,14 +21,17 @@ void setup()
   pinMode(BLUE_PIN, OUTPUT);
   pinMode(PIEZO_PIN,OUTPUT);
   pinMode(PHOTORESISTOR_PIN,INPUT);
+
+  // turn all of the LED pins on
   digitalWrite(RED_PIN,HIGH);
   digitalWrite(GREEN_PIN,HIGH);
   digitalWrite(BLUE_PIN,HIGH);
 
+  // get the maximum value for the photoresistor
   unsigned long current_time = millis();
   unsigned long target_time = current_time + 5000;
   while(current_time < target_time)
-  {
+  { // for 5 seconds, find the maximum value of the photoresistor
     int current_photoresistor_read = analogRead(PHOTORESISTOR_PIN);
     if(current_photoresistor_read > max_photoresistor_read)
     {
@@ -48,5 +57,7 @@ void loop()
     delay(1000);
     digitalWrite(PHOTORESISTOR_PIN,LOW);
   }
+
+  //pause for a millisecond before looping
   delay(1);
 }
