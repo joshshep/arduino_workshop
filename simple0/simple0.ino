@@ -1,7 +1,7 @@
 int PIEZO_PIN = 2;
-int RED_PIN = 3;
+int RED_PIN = 6;
 int GREEN_PIN = 5;
-int BLUE_PIN = 6;
+int BLUE_PIN = 3;
 
 void setup() 
 {
@@ -35,6 +35,23 @@ void loop()
   digitalWrite(BLUE_PIN,HIGH);
   delay(500);
   digitalWrite(BLUE_PIN,LOW);
+
+  // turn on the red *and* green pin (r+g=yellow)
+  digitalWrite(RED_PIN,HIGH); digitalWrite(GREEN_PIN,HIGH);
+  delay(500); // wait 0.5 seconds
+  // turn off the red and green pin
+  digitalWrite(RED_PIN,LOW); digitalWrite(GREEN_PIN,LOW);
+
+  // turn on the green *and* blue pin (g+b=cyan), etc
+  digitalWrite(GREEN_PIN,HIGH); digitalWrite(BLUE_PIN,HIGH);
+  delay(500);
+  digitalWrite(GREEN_PIN,LOW); digitalWrite(BLUE_PIN,LOW);
+
+  digitalWrite(BLUE_PIN,HIGH); digitalWrite(RED_PIN,HIGH);
+  delay(500);
+  digitalWrite(BLUE_PIN,LOW); digitalWrite(RED_PIN,LOW);
+
+  // beep the buzzer for 0.25 seconds
   digitalWrite(PIEZO_PIN,HIGH);
   delay(250);
   digitalWrite(PIEZO_PIN,LOW);
